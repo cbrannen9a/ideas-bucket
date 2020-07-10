@@ -1,8 +1,8 @@
-import React, { useContext, FC } from "react";
-import { AlertContext } from "../../contexts/AlertContext";
+import React, { FC } from "react";
+import { useAlertDispatchContext } from "../../contexts/AlertContext";
 
 const Landing: FC<Props> = () => {
-  const { dispatch } = useContext(AlertContext);
+  const dispatch = useAlertDispatchContext();
   return (
     <div>
       Landing

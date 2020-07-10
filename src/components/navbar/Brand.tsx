@@ -1,9 +1,7 @@
-import React from "react";
+import React, { FC } from "react";
 import Title from "../elements/title";
 import { APP_TITLE } from "../../constants";
 
-const Brand: React.FC<Props> = () => <Title title={APP_TITLE} />;
-
-interface Props {}
+const Brand: FC = () => <Title title={APP_TITLE} />;
 
 export default Brand;

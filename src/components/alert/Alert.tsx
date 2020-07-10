@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { AlertContext } from "../../contexts/AlertContext";
+import React from "react";
+import { useAlertStateContext } from "../../contexts/AlertContext";
 import styled from "styled-components";
 import { useSpring, animated } from "react-spring";
 
 const Alert: React.FC = () => {
-  const { state } = useContext(AlertContext);
+  const state = useAlertStateContext();
 
   const alertAnimation = useSpring({
     from: { transform: "translate3d(0, 10rem, 0)" },

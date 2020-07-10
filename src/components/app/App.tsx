@@ -12,7 +12,7 @@ import PrivateRoute from "../elements/privateRoute";
 import { AuthProvider } from "../../contexts/AuthContext";
 import Logout from "../../pages/logout";
 import Alert from "../alert";
-import { AlertContextProvider } from "../../contexts/AlertContext";
+import AlertContextProvider from "../../contexts/AlertContext";
 
 const App = () => {
   return (

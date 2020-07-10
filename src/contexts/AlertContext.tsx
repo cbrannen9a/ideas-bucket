@@ -1,37 +1,55 @@
-import React, { useReducer, FC, createContext, Dispatch } from "react";
+import React, {
+  useReducer,
+  FC,
+  createContext,
+  Dispatch,
+  useContext,
+} from "react";
 
-const initialState: AlertState = {
+type AlertActions =
+  | { type: "INFO"; message: string }
+  | { type: "WARN"; message: string }
+  | { type: "ERROR"; message: string }
+  | { type: "SUCCESS"; message: string }
+  | { type: "CLOSE" };
+
+type AlertStateContext = {
+  isOpen: boolean;
+  state: "INFO" | "WARN" | "ERROR" | "SUCCESS";
+  message: string;
+};
+
+type AlertDispatchContext = Dispatch<AlertActions>;
+
+const AlertStateContext = createContext<AlertStateContext | undefined>(
+  undefined
+);
+const AlertDispatchContext = createContext<AlertDispatchContext | undefined>(
+  undefined
+);
+
+const initialState: AlertStateContext = {
   isOpen: false,
   state: "INFO",
   message: "",
 };
 
-export const AlertContext = createContext<{
-  state: AlertState;
-  dispatch: Dispatch<AlertActions>;
-}>({
-  state: initialState,
-  dispatch: () => {
-    throw new Error("<AlertContextProvider /> missing from render tree");
-  },
-});
-
-export const AlertContextProvider: FC = ({ children }) => {
+const AlertContextProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <AlertContext.Provider
-      value={{
-        state,
-        dispatch,
-      }}
-    >
-      {children}
-    </AlertContext.Provider>
+    <AlertStateContext.Provider value={state}>
+      <AlertDispatchContext.Provider value={dispatch}>
+        {children}
+      </AlertDispatchContext.Provider>
+    </AlertStateContext.Provider>
   );
 };
 
-const reducer = (state: AlertState, action: AlertActions): AlertState => {
+const reducer = (
+  state: AlertStateContext,
+  action: AlertActions
+): AlertStateContext => {
   switch (action.type) {
     case "INFO":
     case "WARN":
@@ -45,15 +63,23 @@ const reducer = (state: AlertState, action: AlertActions): AlertState => {
   }
 };
 
-type AlertActions =
-  | { type: "INFO"; message: string }
-  | { type: "WARN"; message: string }
-  | { type: "ERROR"; message: string }
-  | { type: "SUCCESS"; message: string }
-  | { type: "CLOSE" };
+export function useAlertStateContext(): AlertStateContext {
+  const context = useContext(AlertStateContext);
+  if (context === undefined) {
+    throw new Error(
+      "useAlertStateContext must be rendered in a tree within a ContextReducer"
+    );
+  }
+  return context;
+}
+export function useAlertDispatchContext(): AlertDispatchContext {
+  const context = useContext(AlertDispatchContext);
+  if (context === undefined) {
+    throw new Error(
+      "useAlertDispatchContext must be rendered in a tree within a ContextReducer"
+    );
+  }
+  return context;
+}
 
-type AlertState = {
-  isOpen: boolean;
-  state: "INFO" | "WARN" | "ERROR" | "SUCCESS";
-  message: string;
-};
+export default AlertContextProvider;
