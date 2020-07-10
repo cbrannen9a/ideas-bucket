@@ -13,7 +13,7 @@ const Alert: React.FC = () => {
 
   return (
     <AlertContainer style={state.isOpen ? alertAnimation : {}}>
-      <Message>{state.message}</Message>
+      <Message state={state.state.toLowerCase()}>{state.message}</Message>
     </AlertContainer>
   );
 };
@@ -26,7 +26,9 @@ const AlertContainer = styled(animated.div)`
   z-index: 10;
 `;
 
-const Message = styled.div`
+const Message = styled.div<{ state: string }>`
+  background: ${(props) => props.theme.alert[props.state]};
+  color: ${(props) => props.theme.main.secondaryText};
   line-height: 2rem;
 `;
 
