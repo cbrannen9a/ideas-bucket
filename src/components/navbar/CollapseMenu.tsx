@@ -46,8 +46,6 @@ const CollapseWrapper = styled(animated.div)`
   background: #2d3436;
   left: 0;
   right: 0;
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
 `;
 
 const NavLinks = styled.ul`
