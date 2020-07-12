@@ -50,7 +50,7 @@ const StyledNavBar = styled.nav`
   width: 100%;
   top: 0;
   left: 0;
-  background: #ffa100;
+  background: ${(props) => props.theme.main.primary};
   z-index: 1;
   font-size: 1rem;
 
@@ -74,7 +74,7 @@ const NavLinks = styled.ul`
   margin: auto 0;
 
   & a {
-    color: #fff;
+    color: ${(props) => props.theme.main.primaryText};
     text-transform: uppercase;
     font-weight: 600;
     border-bottom: 1px solid transparent;
@@ -83,8 +83,8 @@ const NavLinks = styled.ul`
     text-decoration: none;
     cursor: pointer;
     &:hover {
-      color: #000;
-      border-bottom: 1px solid #000;
+      color: ${(props) => props.theme.main.secondaryText};
+      border-bottom: 1px solid ${(props) => props.theme.main.secondaryText};
     }
     @media (max-width: 768px) {
       display: none;
@@ -93,7 +93,7 @@ const NavLinks = styled.ul`
 `;
 
 const BurgerWrapper = styled.div`
-  background-color: #f7f7f7;
+  background-color: ${(props) => props.theme.main.secondary};
   height: 3rem;
   width: 3rem;
   position: fixed;

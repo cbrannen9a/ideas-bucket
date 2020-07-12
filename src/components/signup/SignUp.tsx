@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useHistory } from "react-router";
-import { requestSignUp } from "../../firebase/auth";
+import { requestSignUp } from "../../firebase";
 import { ROUTES } from "../../constants/routes";
 
 const SignUp = () => {

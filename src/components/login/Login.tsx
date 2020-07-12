@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { requestLogin } from "../../firebase/auth";
+import { requestLogin } from "../../firebase";
 import { ROUTES } from "../../constants/routes";
 
 const Login: FC = () => {
