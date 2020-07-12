@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { requestLogout } from "../../firebase/auth";
+import { requestLogout } from "../../firebase";
 import { ROUTES } from "../../constants/routes";
 
 const LogoutPage = () => {

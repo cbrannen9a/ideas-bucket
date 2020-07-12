@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FC } from "react";
-import { onAuthStateChange } from "../firebase/auth";
+import { onAuthStateChange } from "../firebase";
 
 const initialState: AuthState = {
   user: null,

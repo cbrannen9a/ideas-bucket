@@ -1,5 +1,7 @@
-import { firestore } from "./firebase";
-import { Result, ok, err } from "./utils/index";
+import app from "./firebase";
+import { Result, ok, err } from "./utils/result";
+
+const firestore = app.firestore();
 
 export const firestoreWrite = async ({
   collection,
@@ -76,3 +78,5 @@ export const firestoreSet = async ({
     );
   }
 };
+
+export default firestore;
