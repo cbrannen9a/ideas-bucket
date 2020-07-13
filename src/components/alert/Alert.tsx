@@ -1,10 +1,20 @@
-import React from "react";
-import { useAlertStateContext } from "../../contexts/AlertContext";
+import React, { FC } from "react";
+import {
+  useAlertStateContext,
+  useAlertDispatchContext,
+} from "../../contexts/AlertContext";
 import styled from "styled-components";
 import { useSpring, animated } from "react-spring";
+import { useInterval } from "../../hooks";
+import { media, themeColourHelper } from "../../styles";
 
-const Alert: React.FC = () => {
-  const state = useAlertStateContext();
+const Alert: FC = () => {
+  const { state, isOpen, message } = useAlertStateContext();
+  const dispatch = useAlertDispatchContext();
+
+  useInterval({ callback: () => handleClose(), delay: 5200 });
+
+  const handleClose = () => dispatch({ type: "CLOSE" });
 
   const alertAnimation = useSpring({
     from: { transform: "translate3d(0, 10rem, 0)" },
@@ -12,8 +22,13 @@ const Alert: React.FC = () => {
   });
 
   return (
-    <AlertContainer style={state.isOpen ? alertAnimation : {}}>
-      <Message state={state.state.toLowerCase()}>{state.message}</Message>
+    <AlertContainer style={isOpen ? alertAnimation : {}}>
+      <Message state={state} isOpen={isOpen}>
+        {message}
+      </Message>
+      <CloseButton aria-label="close" onClick={handleClose}>
+        CLOSE
+      </CloseButton>
     </AlertContainer>
   );
 };
@@ -26,10 +41,30 @@ const AlertContainer = styled(animated.div)`
   z-index: 10;
 `;
 
-const Message = styled.div<{ state: string }>`
-  background: ${(props) => props.theme.alert[props.state]};
-  color: ${(props) => props.theme.main.secondaryText};
-  line-height: 2rem;
+const Message = styled.div<{ state: string; isOpen: boolean }>`
+  background: ${(props) =>
+    themeColourHelper({ type: "alert", value: props.state }).bg};
+  color: ${(props) =>
+    themeColourHelper({ type: "alert", value: props.state }).fg};
+  line-height: 4rem;
+  padding: ${(props) => (props.isOpen ? "1rem" : 0)};
+  overflow-wrap: anywhere;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: none;
+
+  ${media.maxSmall} {
+    font-size: 1em;
+    margin: 0.25em;
+    padding: 0.1em 0.25em;
+  }
 `;
 
 export default Alert;

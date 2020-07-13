@@ -1,5 +1,5 @@
 import GlobalStyles from "./globalStyle";
 import media from "./media";
-import theme from "./theme";
+import theme, { themeColourHelper } from "./theme";
 
-export { GlobalStyles, media, theme };
+export { GlobalStyles, media, theme, themeColourHelper };

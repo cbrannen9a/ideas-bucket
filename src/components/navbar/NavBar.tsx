@@ -50,7 +50,7 @@ const StyledNavBar = styled.nav`
   width: 100%;
   top: 0;
   left: 0;
-  background: ${(props) => props.theme.main.primary};
+  background: ${(props) => props.theme.main.primary.bg};
   z-index: 1;
   font-size: 1rem;
 
@@ -74,7 +74,7 @@ const NavLinks = styled.ul`
   margin: auto 0;
 
   & a {
-    color: ${(props) => props.theme.main.primaryText};
+    color: ${(props) => props.theme.main.primary.fg};
     text-transform: uppercase;
     font-weight: 600;
     border-bottom: 1px solid transparent;
@@ -83,8 +83,8 @@ const NavLinks = styled.ul`
     text-decoration: none;
     cursor: pointer;
     &:hover {
-      color: ${(props) => props.theme.main.secondaryText};
-      border-bottom: 1px solid ${(props) => props.theme.main.secondaryText};
+      color: ${(props) => props.theme.main.secondary.fg};
+      border-bottom: 1px solid ${(props) => props.theme.main.secondary.fg};
     }
     @media (max-width: 768px) {
       display: none;

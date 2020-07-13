@@ -29,7 +29,7 @@ const Wrapper = styled.div`
     top: 0.9rem;
     right: -0.5rem;
     border-radius: 9px;
-    background: ${(props) => props.theme.main.primary};
+    background: ${(props) => props.theme.main.primary.bg};
     display: block;
     position: relative;
     width: 2rem;
